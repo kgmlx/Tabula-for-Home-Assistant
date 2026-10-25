@@ -1,0 +1,155 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Tabula",
+        "description": "API-Schlüssel in Tabula unter Einstellungen → API-Einstellungen anlegen und hier einfügen.",
+        "data": {
+          "api_key": "API-Schlüssel"
+        },
+        "data_description": {
+          "api_key": "Wird nur einmal angezeigt. Am besten gleich sicher ablegen."
+        }
+      },
+      "reauth_confirm": {
+        "title": "Tabula erneut anmelden",
+        "description": "Der aktuelle API-Schlüssel ist ungültig. Bitte einen neuen Schlüssel für dieselbe Firma eintragen.",
+        "data": {
+          "api_key": "API-Schlüssel"
+        }
+      },
+      "reconfigure": {
+        "title": "Tabula neu konfigurieren",
+        "description": "API-Schlüssel ersetzen. Er muss zur gleichen Firma gehören.",
+        "data": {
+          "api_key": "API-Schlüssel"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Ungültiger API-Schlüssel.",
+      "cannot_connect": "Tabula-API nicht erreichbar."
+    },
+    "abort": {
+      "already_configured": "[%key:common::config_flow::abort::already_configured_account%]",
+      "reauth_successful": "[%key:common::config_flow::abort::reauth_successful%]",
+      "reconfigure_successful": "[%key:common::config_flow::abort::reconfigure_successful%]",
+      "unique_id_mismatch": "Dieser API-Schlüssel gehört zu einer anderen Firma."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "company": {
+        "name": "Firma"
+      },
+      "api_key": {
+        "name": "API-Schlüsselname"
+      },
+      "api_key_expires": {
+        "name": "Schlüssel gültig bis",
+        "state": {
+          "never": "Nie"
+        }
+      },
+      "rate_limit_remaining": {
+        "name": "Rate-Limit übrig"
+      },
+      "last_upload_status": {
+        "name": "Letzter Upload"
+      },
+      "last_batch_status": {
+        "name": "Letzter Batch"
+      }
+    }
+  },
+  "services": {
+    "upload_document": {
+      "name": "Dokument hochladen",
+      "description": "PDF oder XML nach Tabula hochladen.",
+      "fields": {
+        "path": {
+          "name": "Pfad",
+          "description": "Datei unter dem Config- oder einem Media-Ordner. Relative Pfade starten am Config-Verzeichnis."
+        },
+        "document_type": {
+          "name": "Dokumenttyp",
+          "description": "auto reicht für Rechnungen. Kontoauszüge brauchen bank_statement."
+        },
+        "external_id": {
+          "name": "Externe ID",
+          "description": "Eigene ID für sichere Wiederholungen (1-200 Zeichen)."
+        },
+        "poll": {
+          "name": "Warten bis fertig",
+          "description": "Blockiert, bis der Upload abgeschlossen ist oder fehlschlägt."
+        },
+        "config_entry_id": {
+          "name": "Config-Eintrag",
+          "description": "Nur nötig bei mehreren Tabula-Firmen. In der UI die Firma aus der Liste wählen. Für YAML: Einstellungen → Geräte & Dienste → Tabula → Firmeneintrag öffnen; die ID steht in der Browser-Adresse als `config_entry=`."
+        }
+      }
+    },
+    "upload_batch": {
+      "name": "ZIP-Archiv hochladen",
+      "description": "ZIP mit mehreren Dokumenten nach Tabula hochladen.",
+      "fields": {
+        "path": {
+          "name": "Pfad",
+          "description": "Pfad zur .zip-Datei."
+        },
+        "document_type": {
+          "name": "Dokumenttyp",
+          "description": "Gilt für jede Datei im Archiv."
+        },
+        "external_id": {
+          "name": "Externe ID",
+          "description": "ID für das gesamte Archiv (sichere Wiederholungen)."
+        },
+        "poll": {
+          "name": "Warten bis fertig",
+          "description": "Blockiert, bis der Batch nicht mehr verarbeitet wird."
+        },
+        "config_entry_id": {
+          "name": "Config-Eintrag",
+          "description": "Nur nötig bei mehreren Tabula-Firmen. In der UI die Firma aus der Liste wählen. Für YAML: Einstellungen → Geräte & Dienste → Tabula → Firmeneintrag öffnen; die ID steht in der Browser-Adresse als `config_entry=`."
+        }
+      }
+    },
+    "get_upload": {
+      "name": "Upload-Status abrufen",
+      "description": "Status eines bestehenden Uploads abfragen.",
+      "fields": {
+        "upload_id": {
+          "name": "Upload-ID",
+          "description": "UUID vom Upload-Aufruf."
+        },
+        "poll": {
+          "name": "Warten bis fertig",
+          "description": "Fragt weiter nach, bis der Upload einen Endstatus hat."
+        },
+        "config_entry_id": {
+          "name": "Config-Eintrag",
+          "description": "Nur nötig bei mehreren Tabula-Firmen. In der UI die Firma aus der Liste wählen. Für YAML: Einstellungen → Geräte & Dienste → Tabula → Firmeneintrag öffnen; die ID steht in der Browser-Adresse als `config_entry=`."
+        }
+      }
+    },
+    "get_batch": {
+      "name": "Batch-Status abrufen",
+      "description": "Status eines Upload-Batches abfragen.",
+      "fields": {
+        "batch_id": {
+          "name": "Batch-ID",
+          "description": "UUID von upload_batch."
+        },
+        "poll": {
+          "name": "Warten bis fertig",
+          "description": "Fragt weiter nach, bis der Batch einen Endstatus hat."
+        },
+        "config_entry_id": {
+          "name": "Config-Eintrag",
+          "description": "Nur nötig bei mehreren Tabula-Firmen. In der UI die Firma aus der Liste wählen. Für YAML: Einstellungen → Geräte & Dienste → Tabula → Firmeneintrag öffnen; die ID steht in der Browser-Adresse als `config_entry=`."
+        }
+      }
+    }
+  }
+}

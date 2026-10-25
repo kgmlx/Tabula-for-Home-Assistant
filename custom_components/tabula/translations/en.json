@@ -1,0 +1,155 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Tabula",
+        "description": "Create an API key in Tabula under Settings → API settings, then paste it here.",
+        "data": {
+          "api_key": "API key"
+        },
+        "data_description": {
+          "api_key": "Shown only once when created. Store it somewhere safe."
+        }
+      },
+      "reauth_confirm": {
+        "title": "Reauthenticate Tabula",
+        "description": "The current API key is no longer valid. Enter a new key for the same company.",
+        "data": {
+          "api_key": "API key"
+        }
+      },
+      "reconfigure": {
+        "title": "Reconfigure Tabula",
+        "description": "Replace the API key. It must belong to the same company.",
+        "data": {
+          "api_key": "API key"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Invalid API key.",
+      "cannot_connect": "Could not reach the Tabula API."
+    },
+    "abort": {
+      "already_configured": "[%key:common::config_flow::abort::already_configured_account%]",
+      "reauth_successful": "[%key:common::config_flow::abort::reauth_successful%]",
+      "reconfigure_successful": "[%key:common::config_flow::abort::reconfigure_successful%]",
+      "unique_id_mismatch": "This API key belongs to a different company."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "company": {
+        "name": "Company"
+      },
+      "api_key": {
+        "name": "API key name"
+      },
+      "api_key_expires": {
+        "name": "Key expires",
+        "state": {
+          "never": "Never"
+        }
+      },
+      "rate_limit_remaining": {
+        "name": "Rate limit remaining"
+      },
+      "last_upload_status": {
+        "name": "Last upload"
+      },
+      "last_batch_status": {
+        "name": "Last batch"
+      }
+    }
+  },
+  "services": {
+    "upload_document": {
+      "name": "Upload document",
+      "description": "Upload a PDF or XML document to Tabula.",
+      "fields": {
+        "path": {
+          "name": "Path",
+          "description": "File under the Home Assistant config or media folders. Relative paths start at the config directory."
+        },
+        "document_type": {
+          "name": "Document type",
+          "description": "auto works for invoices. Bank statements must use bank_statement."
+        },
+        "external_id": {
+          "name": "External ID",
+          "description": "Your own id for safe retries (1-200 characters)."
+        },
+        "poll": {
+          "name": "Wait until finished",
+          "description": "Block until the upload completes or fails."
+        },
+        "config_entry_id": {
+          "name": "Config entry",
+          "description": "Only needed with more than one Tabula company. In the UI, pick the company from the list. For YAML: open Settings → Devices & services → Tabula → the company entry; the id is the `config_entry=` value in the browser address bar."
+        }
+      }
+    },
+    "upload_batch": {
+      "name": "Upload ZIP archive",
+      "description": "Upload a ZIP of documents to Tabula.",
+      "fields": {
+        "path": {
+          "name": "Path",
+          "description": "Path to the .zip file."
+        },
+        "document_type": {
+          "name": "Document type",
+          "description": "Applied to every file in the archive."
+        },
+        "external_id": {
+          "name": "External ID",
+          "description": "Id for the whole archive (safe retries)."
+        },
+        "poll": {
+          "name": "Wait until finished",
+          "description": "Block until the batch is no longer processing."
+        },
+        "config_entry_id": {
+          "name": "Config entry",
+          "description": "Only needed with more than one Tabula company. In the UI, pick the company from the list. For YAML: open Settings → Devices & services → Tabula → the company entry; the id is the `config_entry=` value in the browser address bar."
+        }
+      }
+    },
+    "get_upload": {
+      "name": "Get upload status",
+      "description": "Fetch the status of an existing upload.",
+      "fields": {
+        "upload_id": {
+          "name": "Upload ID",
+          "description": "UUID returned by the upload call."
+        },
+        "poll": {
+          "name": "Wait until finished",
+          "description": "Keep polling until the upload reaches a final status."
+        },
+        "config_entry_id": {
+          "name": "Config entry",
+          "description": "Only needed with more than one Tabula company. In the UI, pick the company from the list. For YAML: open Settings → Devices & services → Tabula → the company entry; the id is the `config_entry=` value in the browser address bar."
+        }
+      }
+    },
+    "get_batch": {
+      "name": "Get batch status",
+      "description": "Fetch the status of an upload batch.",
+      "fields": {
+        "batch_id": {
+          "name": "Batch ID",
+          "description": "UUID returned by upload_batch."
+        },
+        "poll": {
+          "name": "Wait until finished",
+          "description": "Keep polling until the batch reaches a final status."
+        },
+        "config_entry_id": {
+          "name": "Config entry",
+          "description": "Only needed with more than one Tabula company. In the UI, pick the company from the list. For YAML: open Settings → Devices & services → Tabula → the company entry; the id is the `config_entry=` value in the browser address bar."
+        }
+      }
+    }
+  }
+}

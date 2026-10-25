@@ -1,0 +1,93 @@
+upload_document:
+  fields:
+    path:
+      required: true
+      example: "/config/www/invoice.pdf"
+      selector:
+        text:
+    document_type:
+      default: auto
+      example: supplier_invoice
+      selector:
+        select:
+          options:
+            - auto
+            - supplier_invoice
+            - customer_invoice
+            - bank_statement
+            - other_document
+    external_id:
+      example: ERP-2026-0042
+      selector:
+        text:
+    poll:
+      default: true
+      selector:
+        boolean:
+    config_entry_id:
+      selector:
+        config_entry:
+          integration: tabula
+
+upload_batch:
+  fields:
+    path:
+      required: true
+      example: "/config/www/invoices.zip"
+      selector:
+        text:
+    document_type:
+      default: auto
+      example: auto
+      selector:
+        select:
+          options:
+            - auto
+            - supplier_invoice
+            - customer_invoice
+            - bank_statement
+            - other_document
+    external_id:
+      example: ERP-BATCH-001
+      selector:
+        text:
+    poll:
+      default: true
+      selector:
+        boolean:
+    config_entry_id:
+      selector:
+        config_entry:
+          integration: tabula
+
+get_upload:
+  fields:
+    upload_id:
+      required: true
+      example: "0b7f6f0e-4b8e-5c1d-9f0a-6a2e3d4c5b61"
+      selector:
+        text:
+    poll:
+      default: false
+      selector:
+        boolean:
+    config_entry_id:
+      selector:
+        config_entry:
+          integration: tabula
+
+get_batch:
+  fields:
+    batch_id:
+      required: true
+      example: "497f6eca-6276-4993-bfeb-53cbbbba6f08"
+      selector:
+        text:
+    poll:
+      default: false
+      selector:
+        boolean:
+    config_entry_id:
+      selector:
+        config_entry:
+          integration: tabula

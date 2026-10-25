@@ -1,0 +1,13 @@
+{
+  "domain": "tabula",
+  "name": "Tabula",
+  "categories": ["finance", "productivity_information.documents_photos"],
+  "codeowners": ["@kgmlx"],
+  "config_flow": true,
+  "documentation": "https://github.com/kgmlx/Tabula-for-Home-Assistant/blob/main/README.md",
+  "integration_type": "service",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/kgmlx/Tabula-for-Home-Assistant/issues",
+  "requirements": [],
+  "version": "1.0.0"
+}
