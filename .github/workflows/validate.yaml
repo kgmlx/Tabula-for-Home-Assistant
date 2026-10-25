@@ -1,0 +1,17 @@
+name: Validate HACS
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: HACS validation
+        uses: hacs/action@main
+        with:
+          category: integration
