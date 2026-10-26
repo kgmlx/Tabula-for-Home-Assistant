@@ -1,4 +1,4 @@
-English version: [README.en.md](README.en.md)
+English version: [README.md](README.md)
 
 # Tabula für Home Assistant
 
